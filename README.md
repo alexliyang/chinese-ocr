@@ -2,13 +2,16 @@
 
 # 实现功能
 
-- [ ]  文字方向检测 0、90、180、270度检测 (运用vgg16分类模型实现，正在整理中)
-- [x] 文字检测
+- [x]  文字方向检测 0、90、180、270度检测 
+- [x] 文字检测 后期将切换到keras版本文本检测 实现keras端到端的文本检测及识别
 - [x] 不定长OCR识别 
 
 ## 环境部署
 ``` Bash
+##GPU环境
 sh setup.sh
+##CPU环境
+sh setup-cpu.sh
 ```
 
 # 模型训练
@@ -24,11 +27,14 @@ cd train & sh train-keras.sh
 ``` Bash
 cd train & sh train-pytorch.sh   
 ```
+# 文字方向检测
+基于图像分类，在VGG16模型的基础上，迁移训练0、90、180、270度的文字方向分类模型，详细代码参考angle/predict.py文件，训练图片100000张，准确率95.10%。
+模型地址[百度云](https://pan.baidu.com/s/1nwEyxDZ)下载
 
 # 文字检测
-[文本检测参考](https://github.com/eragonruan/text-detection-ctpn)(https://github.com/eragonruan/text-detection-ctpn)   
-
-在原作者的代码基础上修改编译代码，新增支持CPU模式下的文字检测，详见:https://github.com/chineseocr/new-text-detection-ctpn.git   
+支持CPU、GPU环境，一键部署，
+[文本检测训练参考](https://github.com/eragonruan/text-detection-ctpn)(https://github.com/eragonruan/text-detection-ctpn)   
+ 
 
 # OCR 端到端识别:GRU+CTC
 ## ocr识别采用GRU+CTC端到到识别技术，实现不分隔识别不定长文字
